@@ -23,9 +23,8 @@ int main()
 	Sound music = LoadSound("res/class9.mod");
 	Font fontlol = LoadFont("res/ibm.ttf");
 	
-		
-	Color cur_color = RED;
-	Color des_color = BLUE;
+	Color cur_color = BLUE;
+	Color des_color = RED;
 	int pause = 0;
 
 	while(!WindowShouldClose())
@@ -48,13 +47,21 @@ int main()
 		BeginDrawing();
 		ClearBackground(cur_color);
 		
-		DrawRectangle(0 + 25, 0 + 25, RES_X - 50, RES_Y - 50, (Color){0, 0, 0, 127});
-		
-		
+		Rectangle rec = (Rectangle){
+			0 + 25,
+			0 + 25,
+			RES_X - 50,
+			RES_Y - 50, 
+		};
+
+		DrawRectangleRec(rec, (Color){0, 0, 0, 127});
+		DrawRectangleLinesEx(rec, 4, (Color){255, 255, 255, 127});	
+	
 		for(int i = 0; i < letters; i++)
 		{
 			int text_pos_x = pos_x + (14 * i - 2) + offset_x;
 			int text_pos_y = (int)(25 * sinf(( (float)pos_x + (14.0f*i) )/50.0f)) + pos_y;
+			int text_pos_y_cos = (int)(25 * cosf(( (float)pos_x + (14.0f*i) )/50.0f)) + pos_y;
 			Vector2 text_pos = (Vector2){text_pos_x, text_pos_y};
 
 			DrawTextWithShadow(fontlol, TextFormat("%c", texto[i]), text_pos, 14, 0.0f, WHITE, 1, 1, BLACK);
